@@ -24,8 +24,9 @@
 
   <path d="M560 231 H627" class="line"/>
   <path d="M665 168 L740 231 L665 294 L590 231 Z" class="box" fill="#ffffff"/>
-  <text x="665" y="222" text-anchor="middle" class="tag">REMOTE DESKTOP</text>
-  <text x="665" y="246" text-anchor="middle" class="label">Active?</text>
+  <text x="665" y="210" text-anchor="middle" class="tag">REMOTE</text>
+  <text x="665" y="230" text-anchor="middle" class="tag">DESKTOP</text>
+  <text x="665" y="258" text-anchor="middle" class="label">Active?</text>
 
   <path d="M665 294 V405 H414" class="line"/>
   <text x="544" y="386" class="tag">NO</text>

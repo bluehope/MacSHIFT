@@ -10,7 +10,7 @@ MacSHIFT keeps macOS input sources aligned between two Macs during a remote sess
 
 ## What it supports
 
-- Screen Sharing, Jump Desktop, and other Mac-to-Mac tools that forward keyboard events.
+- Verified with Jump Desktop and macOS Screen Sharing.
 - `local`, `remote`, and `both` roles. The installer detects Jump Desktop Viewer and Connect when present.
 - `Ctrl+Option+H` for Korean (Hangul), `Ctrl+Option+L` for English (Latin), and Right Shift for a local-state toggle.
 - Hammerspoon installation through Homebrew when available, plus a daily opt-out-able update check.
@@ -97,7 +97,7 @@ sh tests/test_release_tools.sh
 
 ## 한국어
 
-MacSHIFT는 원격으로 접속한 두 Mac의 macOS 입력 소스를 맞춰 주는 도구입니다. 현재는 두벌식 한국어와 ABC 영어를 지원합니다. Screen Sharing, Jump Desktop처럼 키보드 이벤트를 전달하는 Mac 간 원격 접속 도구에서 사용할 수 있습니다.
+MacSHIFT는 원격으로 접속한 두 Mac의 macOS 입력 소스를 맞춰 주는 도구입니다. 현재는 두벌식 한국어와 ABC 영어를 지원합니다. Jump Desktop 및 macOS Screen Sharing에서 작동을 확인했습니다.
 
 ### 설치
 
