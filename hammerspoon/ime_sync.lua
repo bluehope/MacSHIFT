@@ -118,7 +118,7 @@ end
 
 local function debounce()
     local current = hs.timer.secondsSinceEpoch()
-    local minimum = tonumber(config.debounceSeconds) or 0.35
+    local minimum = tonumber(config.debounceSeconds) or 0.15
     if current - lastActionAt < minimum then return false end
     lastActionAt = current
     return true
@@ -141,7 +141,7 @@ local function sendRemoteSignal(target)
         notify("Remote signal key is not configured for " .. label, true)
         return false
     end
-    local delay = tonumber(config.signalDelaySeconds) or 0.10
+    local delay = tonumber(config.signalDelaySeconds) or 0.04
     hs.timer.doAfter(delay, function()
         if not isRemoteDesktopFrontmost() then
             notify("Remote desktop became inactive; signal not sent", true)

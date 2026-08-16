@@ -24,6 +24,6 @@ return {
     signalKeys = { ko = "f18", en = "f19" },
     signalModifiers = {},
     showAlerts = true,
-    signalDelaySeconds = 0.10,
-    debounceSeconds = 0.35,
+    signalDelaySeconds = 0.04,
+    debounceSeconds = 0.15,
 }
