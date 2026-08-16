@@ -15,7 +15,7 @@
       <h1>Keep your IME<br>where your cursor is.</h1>
       <p class="lead">MacSHIFT synchronizes Korean and English input sources between two Macs in a shared session. Verified with Jump Desktop and macOS Screen Sharing.</p>
       <p class="install-label">INSTALL ON EACH MAC</p>
-      <code class="install-command">curl -fsSL https://raw.githubusercontent.com/bluehope/MacSHIFT/main/bootstrap.sh | sh</code>
+      <div class="install-line"><code id="install-command" class="install-command">curl -fsSL https://raw.githubusercontent.com/bluehope/MacSHIFT/main/bootstrap.sh | sh</code><button id="copy-install" type="button" aria-label="Copy install command">Copy</button></div>
       <p><a class="button" href="https://github.com/bluehope/MacSHIFT">View on GitHub</a></p>
     </section>
     <section class="grid">
@@ -30,5 +30,18 @@
     <section><h2>Private by design</h2><p>MacSHIFT neither records typing nor reads the clipboard. The optional daily updater only checks GitHub Releases and verifies the release checksum before installation.</p><p lang="ko">MacSHIFT는 입력 내용이나 클립보드를 읽거나 저장하지 않습니다. 현재 두벌식 한국어와 ABC 영어를 지원합니다.</p></section>
   </main>
   <footer>MIT licensed · <a href="https://github.com/bluehope/MacSHIFT">bluehope/MacSHIFT</a></footer>
+  <script>
+    const copyButton = document.getElementById('copy-install');
+    const installCommand = document.getElementById('install-command');
+    copyButton.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(installCommand.textContent);
+        copyButton.textContent = 'Copied';
+      } catch {
+        copyButton.textContent = 'Copy failed';
+      }
+      window.setTimeout(() => { copyButton.textContent = 'Copy'; }, 1800);
+    });
+  </script>
 </body>
 </html>
