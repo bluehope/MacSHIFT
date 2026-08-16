@@ -235,21 +235,6 @@ local function shortcutParts(spec, fallbackModifiers, fallbackKey)
     return modifiers, key
 end
 
-local function configuredToggleShortcut()
-    if config.toggleShortcut ~= nil then return config.toggleShortcut end
-    -- Compatibility with configurations generated before toggleShortcut.
-    if config.rightShiftEnabled ~= nil then
-        return config.rightShiftEnabled and { "rightshift" } or false
-    end
-    if config.rightOptionEnabled ~= nil then
-        return config.rightOptionEnabled and { "rightoption" } or false
-    end
-    if config.rightCommandEnabled ~= nil then
-        return config.rightCommandEnabled and { "rightcmd" } or false
-    end
-    return { "rightshift" }
-end
-
 local modifierKeys = {
     rightshift = { flag = "shift", fallbackCode = 60 },
     leftshift = { flag = "shift", fallbackCode = 56 },
@@ -324,26 +309,17 @@ function api.start()
     end
 
     if isLocalRole() then
-        local shortcuts = config.localShortcuts or {}
-        local ko = shortcuts.ko or { "ctrl", "alt", "H" }
-        local en = shortcuts.en or { "ctrl", "alt", "L" }
+        local shortcuts = config.imeShortcuts or {}
+        local ko = shortcuts.korean or { "ctrl", "alt", "H" }
+        local en = shortcuts.english or { "ctrl", "alt", "L" }
         local koModifiers, koKey = shortcutParts(ko, { "ctrl", "alt" }, "H")
         local enModifiers, enKey = shortcutParts(en, { "ctrl", "alt" }, "L")
         bindHotkey(koModifiers, koKey, function() api.setBoth("KO") end)
         bindHotkey(enModifiers, enKey, function() api.setBoth("EN") end)
 
-        bindToggleShortcut(configuredToggleShortcut())
-
-        if config.capsLockEnabled then
-            local eventtap = hs.eventtap.new({ hs.eventtap.event.types.keyDown }, function(event)
-                if event:getKeyCode() ~= 57 or not isRemoteDesktopFrontmost() then return false end
-                local current = hs.keycodes.currentSourceID()
-                api.setBoth(current == config.koreanSourceID and "EN" or "KO")
-                return true
-            end)
-            table.insert(activeEventTaps, eventtap)
-            eventtap:start()
-        end
+        local toggle = shortcuts.toggle
+        if toggle == nil then toggle = { "rightshift" } end
+        bindToggleShortcut(toggle)
     end
     return true
 end

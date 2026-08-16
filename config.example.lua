@@ -9,10 +9,16 @@ return {
         "com.p5sys.jump.mac.viewer", -- Jump Desktop Viewer
         "com.apple.ScreenSharing", -- macOS Screen Sharing
     },
-    localShortcuts = {
+    imeShortcuts = {
         -- 기본 조합: H = Hangul(한국어), L = Latin(영어). Option은 Hammerspoon에서 alt입니다.
-        ko = { "ctrl", "alt", "H" },
-        en = { "ctrl", "alt", "L" },
+        korean = { "ctrl", "alt", "H" },
+        english = { "ctrl", "alt", "L" },
+        -- 현재 입력 소스를 기준으로 KO/EN을 토글합니다.
+        toggle = { "rightshift" },
+        -- 다른 예시:
+        -- toggle = { "rightoption" },
+        -- toggle = { "ctrl", "alt", "space" },
+        -- toggle = false, -- 토글 단축키 끄기
     },
     -- Hammerspoon key name은 공식 map 표기에 맞춰 소문자로 둡니다.
     signalKeys = { ko = "f18", en = "f19" },
@@ -20,11 +26,4 @@ return {
     showAlerts = true,
     signalDelaySeconds = 0.10,
     debounceSeconds = 0.35,
-    capsLockEnabled = false,
-    -- 현재 입력 소스를 기준으로 KO/EN을 토글합니다.
-    toggleShortcut = { "rightshift" },
-    -- 다른 예시:
-    -- toggleShortcut = { "rightoption" },
-    -- toggleShortcut = { "ctrl", "alt", "space" },
-    -- toggleShortcut = false, -- 토글 단축키 끄기
 }

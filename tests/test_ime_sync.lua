@@ -58,20 +58,23 @@ hs = {
     },
 }
 
-local function load(role, toggleShortcut)
-    if toggleShortcut == nil then toggleShortcut = false end
+local function load(role, toggleBinding)
+    if toggleBinding == nil then toggleBinding = false end
     IME_SYNC_CONFIG = {
         role = role,
         abcSourceID = "com.apple.keylayout.ABC",
         koreanSourceID = "com.apple.inputmethod.Korean.2SetKorean",
         remoteDesktopBundleIDs = { "com.p5sys.jump.mac.viewer", "com.apple.ScreenSharing" },
-        localShortcuts = { ko = { "ctrl", "alt", "H" }, en = { "ctrl", "alt", "L" } },
+        imeShortcuts = {
+            korean = { "ctrl", "alt", "H" },
+            english = { "ctrl", "alt", "L" },
+            toggle = toggleBinding,
+        },
         signalKeys = { ko = "f18", en = "f19" },
         signalModifiers = {},
         showAlerts = false,
         debounceSeconds = 0,
         signalDelaySeconds = 0,
-        toggleShortcut = toggleShortcut,
     }
     return dofile("hammerspoon/ime_sync.lua")
 end

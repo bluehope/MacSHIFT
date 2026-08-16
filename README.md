@@ -70,24 +70,25 @@ Your settings live at `~/.config/macshift/config.lua`; installed defaults live b
 
 ### Customize shortcuts
 
-Edit **`~/.config/macshift/config.lua`**—not `config.defaults.lua`—then reload Hammerspoon. For example:
+Edit **`~/.config/macshift/config.lua`**—not `config.defaults.lua`. Replace its entire `imeShortcuts` block with your preferred mappings, then reload Hammerspoon. For example:
 
 ```lua
-localShortcuts = {
-    ko = { "ctrl", "alt", "H" },
-    en = { "ctrl", "alt", "L" },
+imeShortcuts = {
+    korean = { "ctrl", "alt", "H" },
+    english = { "ctrl", "alt", "L" },
+    toggle = { "rightoption" },
+    -- toggle = { "ctrl", "alt", "space" },
+    -- toggle = false, -- disable the toggle shortcut
 },
-
-toggleShortcut = { "rightoption" },
--- toggleShortcut = { "ctrl", "alt", "space" },
--- toggleShortcut = false, -- disable the toggle shortcut
 ```
 
-`toggleShortcut` accepts either a single modifier key (`rightshift`, `rightoption`, `rightcmd`, or `capslock`) or a normal shortcut with modifiers. Modifier-free character keys are intentionally rejected to avoid intercepting normal typing. Keep `signalKeys` unchanged unless you also make the same change on the other Mac.
+`imeShortcuts.toggle` accepts either a single modifier key (`rightshift`, `rightoption`, `rightcmd`, or `capslock`) or a normal shortcut with modifiers. Modifier-free character keys are intentionally rejected to avoid intercepting normal typing. Keep `signalKeys` unchanged unless you also make the same change on the other Mac.
 
 ```sh
 hs -c 'hs.reload()'
 ```
+
+한국어로는, `~/.config/macshift/config.lua` 안의 **`imeShortcuts` 블록 전체를 위 예시처럼 원하는 키 조합으로 바꾼 뒤** `hs -c 'hs.reload()'`를 실행하면 됩니다.
 
 ### Powered by Hammerspoon
 

@@ -7,15 +7,14 @@ return {
         "com.p5sys.jump.mac.viewer", -- Jump Desktop Viewer
         "com.apple.ScreenSharing", -- macOS Screen Sharing
     },
-    localShortcuts = {
-        ko = { "ctrl", "alt", "H" },
-        en = { "ctrl", "alt", "L" },
+    imeShortcuts = {
+        korean = { "ctrl", "alt", "H" },
+        english = { "ctrl", "alt", "L" },
+        toggle = { "rightshift" },
     },
     signalKeys = { ko = "f18", en = "f19" },
     signalModifiers = {},
     showAlerts = true,
     signalDelaySeconds = 0.10,
     debounceSeconds = 0.35,
-    capsLockEnabled = false,
-    -- Toggle defaults to { "rightshift" } when not overridden in config.lua.
 }
