@@ -8,6 +8,18 @@ MacSHIFT keeps macOS input sources aligned between two Macs in a shared session.
 
 > Status: Korean/English support is ready. Japanese and Chinese are documented as a future CJK extension, not as a current feature.
 
+## Why MacSHIFT?
+
+When working through a remote Mac session, the two Macs keep their input-source state independently. You may be in Korean on the Mac at your keyboard while the other Mac is still in English, or the reverse. The next keystroke then lands in the wrong language, interrupting typing and requiring a manual correction on the other side.
+
+MacSHIFT makes that handoff explicit: after connecting, it applies the Korean or English state you choose on this Mac to the other Mac as well.
+
+### 왜 MacSHIFT가 필요한가요?
+
+원격 Mac에 접속해도 두 Mac의 입력 소스 상태는 각각 따로 유지됩니다. 내 키보드가 연결된 Mac은 한글인데 다른 Mac은 영어인 상태, 또는 그 반대 상태가 생길 수 있습니다. 다음 입력이 엉뚱한 언어로 들어가고, 다른 쪽에서 다시 수동으로 고쳐야 합니다.
+
+MacSHIFT는 이 전환을 명시적으로 맞춥니다. 접속 후 이 Mac에서 선택한 한글 또는 영어 상태를 다른 Mac에도 같은 상태로 적용합니다.
+
 ## See it in action
 
 <picture>
