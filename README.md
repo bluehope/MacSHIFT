@@ -55,7 +55,7 @@ The other Mac receives `F18` for Korean and `F19` for English. Use `--role remot
 ./install.sh --role both
 ```
 
-When no role is provided, Viewer-only selects `local`, Connect-only selects `remote`, and a Mac with both defaults to `both`.
+When no role is provided, Viewer-only selects `local`, Connect-only selects `remote`, and every other case—including Screen Sharing-only Macs—defaults to `both`. This makes the one-command installation work without extra options.
 
 ## Updates and configuration
 

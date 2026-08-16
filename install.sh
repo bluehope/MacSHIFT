@@ -61,22 +61,9 @@ detect_role() {
     [ -d "/Applications/Jump Desktop Connect.app" ] && connect_present=1
     if [ "$viewer_present" = 1 ] && [ "$connect_present" = 0 ]; then printf '%s' local; return; fi
     if [ "$viewer_present" = 0 ] && [ "$connect_present" = 1 ]; then printf '%s' remote; return; fi
-    if [ -t 0 ]; then
-        if [ "$viewer_present" = 1 ] && [ "$connect_present" = 1 ]; then
-            printf '%s' 'Both Jump Desktop Viewer and Connect were found. Install role [local/remote/both] (default: both): ' >&2
-        else
-            printf '%s' 'Jump Desktop role not detected. Install role [local/remote/both] (default: local): ' >&2
-        fi
-        read -r detected
-        case "$detected" in
-            remote|both) printf '%s' "$detected" ;;
-            ''|local) [ "$viewer_present" = 1 ] && [ "$connect_present" = 1 ] && printf '%s' both || printf '%s' local ;;
-            *) echo "Invalid role: $detected" >&2; exit 2 ;;
-        esac
-        return
-    fi
-    echo 'Could not detect Jump Desktop role; use --role local, remote, or both.' >&2
-    exit 2
+    # If both apps—or neither app—are detectable, enable both directions.
+    # This keeps non-interactive curl installation usable on Screen Sharing-only Macs.
+    printf '%s' both
 }
 
 [ -n "$role" ] || role="$(detect_role)"
@@ -96,7 +83,7 @@ command -v brew >/dev/null 2>&1 && echo "Homebrew: installed ($(brew --version |
 [ -d "/Applications/Hammerspoon.app" ] && echo "Hammerspoon: installed ($(version_for_app /Applications/Hammerspoon.app))" || echo 'Hammerspoon: NOT INSTALLED'
 [ -n "$viewer_app" ] && echo "Jump Desktop Viewer: installed ($(version_for_app "$viewer_app"))" || echo 'Jump Desktop Viewer: not found'
 [ -n "$connect_app" ] && echo "Jump Desktop Connect: installed ($(version_for_app "$connect_app"))" || echo 'Jump Desktop Connect: not found'
-echo "Role: $role"
+echo "Role: $role (automatic default when neither or both Jump Desktop apps are detected)"
 echo "Korean Source ID: $korean_source_id"
 echo 'Shortcuts: Ctrl+Option+H = Korean (Hangul); Ctrl+Option+L = English (Latin)'
 echo 'Right Shift: toggle locally, and synchronize while a remote desktop app is active'
