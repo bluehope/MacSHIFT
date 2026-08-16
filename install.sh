@@ -143,6 +143,7 @@ do
     local macshiftRoot = "$package_dir"
     IME_SYNC_CONFIG_PATH = macshiftRoot .. "/config.lua"
     IME_SYNC_DEFAULTS_PATH = macshiftRoot .. "/config.defaults.lua"
+    require("hs.ipc")
     dofile(macshiftRoot .. "/hammerspoon/ime_sync.lua")
 end
 -- END MacSHIFT
@@ -169,7 +170,45 @@ else
     rm -f "$agent_file"
 fi
 
+hammerspoon_reloaded=0
+if [ "${MACSHIFT_SKIP_HAMMERSPOON_RELOAD:-0}" != 1 ]; then
+    hammerspoon_cli="$(command -v hs 2>/dev/null || true)"
+    [ -n "$hammerspoon_cli" ] || hammerspoon_cli="/Applications/Hammerspoon.app/Contents/Frameworks/hs/hs"
+    wait_for_hammerspoon_ipc() {
+        for attempt in 1 2 3 4 5; do
+            if "$hammerspoon_cli" -c 'return true' >/dev/null 2>&1; then
+                return
+            fi
+            sleep 1
+        done
+        return 1
+    }
+    reload_hammerspoon() {
+        # Reload closes the IPC connection, so success is confirmed by a new IPC response.
+        "$hammerspoon_cli" -c 'hs.reload()' >/dev/null 2>&1 || true
+        if wait_for_hammerspoon_ipc; then
+            hammerspoon_reloaded=1
+        fi
+    }
+    open -gj -a Hammerspoon >/dev/null 2>&1 || true
+    if [ -x "$hammerspoon_cli" ]; then
+        if wait_for_hammerspoon_ipc; then reload_hammerspoon; fi
+        # An already-running Hammerspoon may not yet have hs.ipc loaded.
+        # Restart once so the new loader enables it, then reload normally.
+        if [ "$hammerspoon_reloaded" != 1 ] && command -v osascript >/dev/null 2>&1; then
+            osascript -e 'tell application "Hammerspoon" to quit' >/dev/null 2>&1 || true
+            sleep 1
+            open -gj -a Hammerspoon >/dev/null 2>&1 || true
+            if wait_for_hammerspoon_ipc; then reload_hammerspoon; fi
+        fi
+    fi
+fi
+
 echo "Installed MacSHIFT $(cat "$source_dir/VERSION") to $package_dir"
 echo "Hammerspoon loader: $init_file"
 echo "Automatic updates: $([ "$auto_update" = 1 ] && echo enabled || echo disabled)"
-echo 'Allow Hammerspoon in System Settings > Privacy & Security > Accessibility, then run hs.reload().'
+if [ "$hammerspoon_reloaded" = 1 ]; then
+    echo 'Hammerspoon started and configuration reloaded.'
+else
+    echo 'Hammerspoon reload could not be confirmed. Allow Accessibility in System Settings > Privacy & Security > Accessibility, then run hs.reload().'
+fi

@@ -33,7 +33,7 @@ curl -fsSL https://raw.githubusercontent.com/bluehope/MacSHIFT/main/bootstrap.sh
 
 The bootstrap downloads the latest tagged release and verifies its SHA-256 checksum before running the installer. Review the script before using a pipe-to-shell installation.
 
-After installation, grant **Hammerspoon** Accessibility permission in **System Settings → Privacy & Security → Accessibility**, then reload Hammerspoon:
+The installer starts Hammerspoon and reloads its configuration automatically. If macOS requests it, grant **Hammerspoon** Accessibility permission in **System Settings → Privacy & Security → Accessibility**. You can reload manually if needed:
 
 ```lua
 hs.reload()
@@ -113,7 +113,7 @@ cd MacSHIFT
 curl -fsSL https://raw.githubusercontent.com/bluehope/MacSHIFT/main/bootstrap.sh | sh
 ```
 
-설치 뒤 **시스템 설정 → 개인정보 보호 및 보안 → 손쉬운 사용**에서 Hammerspoon을 허용하고 Hammerspoon Console에서 `hs.reload()`를 실행합니다.
+설치기는 Hammerspoon을 실행하고 설정을 자동으로 다시 읽습니다. macOS가 요청하면 **시스템 설정 → 개인정보 보호 및 보안 → 손쉬운 사용**에서 Hammerspoon을 허용합니다. 필요하면 Hammerspoon Console에서 `hs.reload()`를 다시 실행할 수 있습니다.
 
 ### 사용
 
