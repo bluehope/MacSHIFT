@@ -1,5 +1,6 @@
 -- MacSHIFT: Mac IME synchronization for remote Mac sessions.
 -- Loaded by ~/.hammerspoon/init.lua on either the local or remote Mac.
+-- Author: Hongkee Yoon <bluehope@gmail.com>
 
 local function mergeTables(defaults, overrides)
     local merged = {}
