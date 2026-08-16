@@ -58,7 +58,7 @@ MacSHIFT는 Hammerspoon을 이용해 이 Mac에서 선택한 한글 또는 영�
 - Verified with Jump Desktop and macOS Screen Sharing.
 - The installer’s setup labels are `local` for the Mac you connect from, `remote` for the other Mac, and `both` for a Mac used in either direction.
 - `Ctrl+Option+H` for Korean (Hangul), `Ctrl+Option+L` for English (Latin), and Right Shift to toggle from this Mac’s current input source.
-- Hammerspoon installation through Homebrew when available, plus a daily opt-out-able update check.
+- [Hammerspoon](https://www.hammerspoon.org/) installation through Homebrew when available, plus a daily opt-out-able update check.
 
 ## Install
 
