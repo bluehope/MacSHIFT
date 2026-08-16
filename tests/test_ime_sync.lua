@@ -63,7 +63,7 @@ local function load(role)
         role = role,
         abcSourceID = "com.apple.keylayout.ABC",
         koreanSourceID = "com.apple.inputmethod.Korean.2SetKorean",
-        jumpDesktopBundleIDs = { "com.p5sys.jump.mac.viewer" },
+        remoteDesktopBundleIDs = { "com.p5sys.jump.mac.viewer", "com.apple.ScreenSharing" },
         localShortcuts = { ko = { "ctrl", "alt", "H" }, en = { "ctrl", "alt", "L" } },
         signalKeys = { ko = "f18", en = "f19" },
         signalModifiers = {},
@@ -78,6 +78,11 @@ local localAPI = load("local")
 check(localAPI.setBoth("KO") == true, "local KO command succeeds")
 check(currentSource == "com.apple.inputmethod.Korean.2SetKorean", "local KO selects Korean source")
 check(#sentKeys == 1 and sentKeys[1].key == "f18", "local KO sends F18")
+
+frontmostBundle = "com.apple.ScreenSharing"
+sentKeys = {}
+check(localAPI.setBoth("EN") == true, "Screen Sharing is recognized as a remote desktop")
+check(#sentKeys == 1 and sentKeys[1].key == "f19", "Screen Sharing sends F19")
 
 frontmostBundle = "com.apple.TextEdit"
 local before = #sentKeys

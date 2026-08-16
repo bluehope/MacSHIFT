@@ -5,7 +5,10 @@ return {
     -- 이 컴퓨터의 HIToolbox 설정에서 확인한 두벌식 Source ID입니다.
     -- 다른 Mac에서 다르면 설치 시 --korean-source-id로 덮어쓸 수 있습니다.
     koreanSourceID = "com.apple.inputmethod.Korean.2SetKorean",
-    jumpDesktopBundleIDs = { "com.p5sys.jump.mac.viewer" },
+    remoteDesktopBundleIDs = {
+        "com.p5sys.jump.mac.viewer", -- Jump Desktop Viewer
+        "com.apple.ScreenSharing", -- macOS Screen Sharing
+    },
     localShortcuts = {
         -- 기본 조합: H = Hangul(한국어), L = Latin(영어). Option은 Hammerspoon에서 alt입니다.
         ko = { "ctrl", "alt", "H" },

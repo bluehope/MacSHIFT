@@ -3,7 +3,10 @@ return {
     role = "local",
     abcSourceID = "com.apple.keylayout.ABC",
     koreanSourceID = "com.apple.inputmethod.Korean.2SetKorean",
-    jumpDesktopBundleIDs = { "com.p5sys.jump.mac.viewer" },
+    remoteDesktopBundleIDs = {
+        "com.p5sys.jump.mac.viewer", -- Jump Desktop Viewer
+        "com.apple.ScreenSharing", -- macOS Screen Sharing
+    },
     localShortcuts = {
         ko = { "ctrl", "alt", "H" },
         en = { "ctrl", "alt", "L" },

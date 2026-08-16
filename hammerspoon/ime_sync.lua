@@ -105,11 +105,12 @@ local function setSource(sourceID, label)
     return true
 end
 
-local function isJumpDesktopFrontmost()
+local function isRemoteDesktopFrontmost()
     local app = hs.application.frontmostApplication()
     if not app then return false end
     local bundleID = app:bundleID()
-    for _, allowed in ipairs(config.jumpDesktopBundleIDs or {}) do
+    local configured = config.remoteDesktopBundleIDs or config.jumpDesktopBundleIDs or {}
+    for _, allowed in ipairs(configured) do
         if bundleID == allowed then return true end
     end
     return false
@@ -132,8 +133,8 @@ end
 
 local function sendRemoteSignal(target)
     local _, label, modifiers, key = targetDetails(target)
-    if not isJumpDesktopFrontmost() then
-        notify("Jump Desktop is not active", true)
+    if not isRemoteDesktopFrontmost() then
+        notify("Remote desktop is not active", true)
         return false
     end
     if type(key) ~= "string" or key == "" then
@@ -142,8 +143,8 @@ local function sendRemoteSignal(target)
     end
     local delay = tonumber(config.signalDelaySeconds) or 0.10
     hs.timer.doAfter(delay, function()
-        if not isJumpDesktopFrontmost() then
-            notify("Jump Desktop became inactive; signal not sent", true)
+        if not isRemoteDesktopFrontmost() then
+            notify("Remote desktop became inactive; signal not sent", true)
             return
         end
         hs.eventtap.keyStroke(modifiers, key, 0)
@@ -181,7 +182,7 @@ function api.setBoth(target)
         notify("Local Controller is not enabled", true)
         return false
     end
-    local jumpActive = isJumpDesktopFrontmost()
+    local jumpActive = isRemoteDesktopFrontmost()
     local notification = jumpActive and "MacSHIFT → " or "Local IME → "
     if not applyTarget(target, notification) then return false end
 
@@ -207,7 +208,7 @@ function api.toggleBothFromLocal()
     end
     local current = hs.keycodes.currentSourceID()
     local target = current == config.koreanSourceID and "EN" or "KO"
-    if isJumpDesktopFrontmost() then
+    if isRemoteDesktopFrontmost() then
         return api.setBoth(target)
     end
     return api.setLocal(target)
@@ -247,7 +248,7 @@ function api.start()
         }
         local receiverTap = hs.eventtap.new({ hs.eventtap.event.types.keyDown, hs.eventtap.event.types.keyUp }, function(event)
             -- While sending from the local controller, let F18/F19 reach Jump Desktop.
-            if isJumpDesktopFrontmost() then return false end
+            if isRemoteDesktopFrontmost() then return false end
             local keyCode = event:getKeyCode()
             local target = keyCode == keyCodes.ko and "KO" or (keyCode == keyCodes.en and "EN" or nil)
             if not target then return false end
@@ -298,7 +299,7 @@ function api.start()
 
         if config.capsLockEnabled then
             local eventtap = hs.eventtap.new({ hs.eventtap.event.types.keyDown }, function(event)
-                if event:getKeyCode() ~= 57 or not isJumpDesktopFrontmost() then return false end
+                if event:getKeyCode() ~= 57 or not isRemoteDesktopFrontmost() then return false end
                 local current = hs.keycodes.currentSourceID()
                 api.setBoth(current == config.koreanSourceID and "EN" or "KO")
                 return true
@@ -312,7 +313,7 @@ end
 
 api.config = config
 api._sourceExists = sourceExists
-api._isJumpDesktopFrontmost = isJumpDesktopFrontmost
+api._isRemoteDesktopFrontmost = isRemoteDesktopFrontmost
 api._mergeTables = mergeTables
 
 api.start()
