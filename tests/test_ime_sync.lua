@@ -25,7 +25,7 @@ hs = {
         doAfter = function(_, callback) callback() end,
     },
     keycodes = {
-        map = { f18 = 100, f19 = 101 },
+        map = { f18 = 100, f19 = 101, rightshift = 60 },
         layouts = function() return {
             "com.apple.keylayout.ABC",
         } end,
@@ -44,7 +44,7 @@ hs = {
         keyStroke = function(modifiers, key)
             table.insert(sentKeys, { modifiers = modifiers, key = key })
         end,
-        event = { types = { keyDown = 10, keyUp = 11 } },
+        event = { types = { keyDown = 10, keyUp = 11, flagsChanged = 12 } },
         new = function(_, callback)
             eventTapCallback = callback
             return { start = function() end }
@@ -58,7 +58,8 @@ hs = {
     },
 }
 
-local function load(role)
+local function load(role, toggleShortcut)
+    if toggleShortcut == nil then toggleShortcut = false end
     IME_SYNC_CONFIG = {
         role = role,
         abcSourceID = "com.apple.keylayout.ABC",
@@ -70,6 +71,7 @@ local function load(role)
         showAlerts = false,
         debounceSeconds = 0,
         signalDelaySeconds = 0,
+        toggleShortcut = toggleShortcut,
     }
     return dofile("hammerspoon/ime_sync.lua")
 end
@@ -78,6 +80,11 @@ local localAPI = load("local")
 check(localAPI.setBoth("KO") == true, "local KO command succeeds")
 check(currentSource == "com.apple.inputmethod.Korean.2SetKorean", "local KO selects Korean source")
 check(#sentKeys == 1 and sentKeys[1].key == "f18", "local KO sends F18")
+
+local toggleAPI = load("local", { "ctrl", "alt", "space" })
+local toggleBinding = hotkeys[#hotkeys]
+check(toggleBinding.key == "space", "custom toggle shortcut is bound")
+check(#toggleBinding.modifiers == 2, "custom toggle shortcut keeps modifiers")
 
 frontmostBundle = "com.apple.ScreenSharing"
 sentKeys = {}

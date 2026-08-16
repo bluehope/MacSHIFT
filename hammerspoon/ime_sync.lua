@@ -224,7 +224,7 @@ local function bindHotkey(modifiers, key, callback)
 end
 
 local function shortcutParts(spec, fallbackModifiers, fallbackKey)
-    if type(spec) ~= "table" or #spec < 2 then
+    if type(spec) ~= "table" or #spec < 1 then
         return fallbackModifiers, fallbackKey
     end
     local key = spec[#spec]
@@ -233,6 +233,61 @@ local function shortcutParts(spec, fallbackModifiers, fallbackKey)
         table.insert(modifiers, spec[index])
     end
     return modifiers, key
+end
+
+local function configuredToggleShortcut()
+    if config.toggleShortcut ~= nil then return config.toggleShortcut end
+    -- Compatibility with configurations generated before toggleShortcut.
+    if config.rightShiftEnabled ~= nil then
+        return config.rightShiftEnabled and { "rightshift" } or false
+    end
+    if config.rightOptionEnabled ~= nil then
+        return config.rightOptionEnabled and { "rightoption" } or false
+    end
+    if config.rightCommandEnabled ~= nil then
+        return config.rightCommandEnabled and { "rightcmd" } or false
+    end
+    return { "rightshift" }
+end
+
+local modifierKeys = {
+    rightshift = { flag = "shift", fallbackCode = 60 },
+    leftshift = { flag = "shift", fallbackCode = 56 },
+    rightoption = { flag = "alt", fallbackCode = 61 },
+    leftoption = { flag = "alt", fallbackCode = 58 },
+    rightalt = { flag = "alt", fallbackCode = 61 },
+    leftalt = { flag = "alt", fallbackCode = 58 },
+    rightcmd = { flag = "cmd", fallbackCode = 54 },
+    leftcmd = { flag = "cmd", fallbackCode = 55 },
+    capslock = { flag = "capslock", fallbackCode = 57 },
+}
+
+local function bindToggleShortcut(spec)
+    if spec == false then return end
+    local modifiers, key = shortcutParts(spec, {}, nil)
+    if type(key) ~= "string" or key == "" then
+        notify("Toggle shortcut is not configured", true)
+        return
+    end
+
+    local modifierKey = #modifiers == 0 and modifierKeys[key:lower()] or nil
+    if modifierKey then
+        local keyCode = hs.keycodes.map[key:lower()] or modifierKey.fallbackCode
+        local eventTap = hs.eventtap.new({ hs.eventtap.event.types.flagsChanged }, function(event)
+            if event:getKeyCode() ~= keyCode then return false end
+            if event:getFlags()[modifierKey.flag] then api.toggleBothFromLocal() end
+            return true
+        end)
+        table.insert(activeEventTaps, eventTap)
+        eventTap:start()
+        return
+    end
+
+    if #modifiers == 0 then
+        notify("Toggle shortcut needs modifiers unless it is a modifier key", true)
+        return
+    end
+    bindHotkey(modifiers, key, function() api.toggleBothFromLocal() end)
 end
 
 function api.start()
@@ -277,25 +332,7 @@ function api.start()
         bindHotkey(koModifiers, koKey, function() api.setBoth("KO") end)
         bindHotkey(enModifiers, enKey, function() api.setBoth("EN") end)
 
-        local rightShiftEnabled = config.rightShiftEnabled
-        -- Backward compatibility for configs generated before Right Shift.
-        if rightShiftEnabled == nil then rightShiftEnabled = config.rightOptionEnabled end
-        if rightShiftEnabled == nil then rightShiftEnabled = config.rightCommandEnabled end
-        if rightShiftEnabled then
-            local rightShiftKeyCode = hs.keycodes.map.rightshift or 60
-            local rightShiftTap = hs.eventtap.new({ hs.eventtap.event.types.flagsChanged }, function(event)
-                if event:getKeyCode() ~= rightShiftKeyCode then
-                    return false
-                end
-                local flags = event:getFlags()
-                if flags.shift then
-                    api.toggleBothFromLocal()
-                end
-                return true
-            end)
-            table.insert(activeEventTaps, rightShiftTap)
-            rightShiftTap:start()
-        end
+        bindToggleShortcut(configuredToggleShortcut())
 
         if config.capsLockEnabled then
             local eventtap = hs.eventtap.new({ hs.eventtap.event.types.keyDown }, function(event)

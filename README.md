@@ -68,6 +68,31 @@ MacSHIFT installs a daily LaunchAgent update check by default. It downloads only
 
 Your settings live at `~/.config/macshift/config.lua`; installed defaults live beside it in `config.defaults.lua`. Defaults are merged with your settings, so new options can be added without overwriting your role, Source IDs, or shortcuts.
 
+### Customize shortcuts
+
+Edit **`~/.config/macshift/config.lua`**—not `config.defaults.lua`—then reload Hammerspoon. For example:
+
+```lua
+localShortcuts = {
+    ko = { "ctrl", "alt", "H" },
+    en = { "ctrl", "alt", "L" },
+},
+
+toggleShortcut = { "rightoption" },
+-- toggleShortcut = { "ctrl", "alt", "space" },
+-- toggleShortcut = false, -- disable the toggle shortcut
+```
+
+`toggleShortcut` accepts either a single modifier key (`rightshift`, `rightoption`, `rightcmd`, or `capslock`) or a normal shortcut with modifiers. Modifier-free character keys are intentionally rejected to avoid intercepting normal typing. Keep `signalKeys` unchanged unless you also make the same change on the other Mac.
+
+```sh
+hs -c 'hs.reload()'
+```
+
+### Powered by Hammerspoon
+
+[Hammerspoon](https://www.hammerspoon.org/) is MacSHIFT’s runtime, not just an installer dependency: it listens for shortcuts, switches macOS input sources, sends and receives the F18/F19 synchronization signals, and reloads configuration. See the official [Hotkey documentation](https://www.hammerspoon.org/docs/hs.hotkey.html) and [IPC/CLI documentation](https://www.hammerspoon.org/docs/hs.ipc.html).
+
 To identify a different input source ID, run this in Hammerspoon Console:
 
 ```lua

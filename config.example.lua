@@ -21,6 +21,10 @@ return {
     signalDelaySeconds = 0.10,
     debounceSeconds = 0.35,
     capsLockEnabled = false,
-    -- Jump Desktop가 최전면일 때 오른쪽 Shift 단독 입력으로 한/영 전환
-    rightShiftEnabled = true,
+    -- 현재 입력 소스를 기준으로 KO/EN을 토글합니다.
+    toggleShortcut = { "rightshift" },
+    -- 다른 예시:
+    -- toggleShortcut = { "rightoption" },
+    -- toggleShortcut = { "ctrl", "alt", "space" },
+    -- toggleShortcut = false, -- 토글 단축키 끄기
 }

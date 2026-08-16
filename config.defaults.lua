@@ -17,5 +17,5 @@ return {
     signalDelaySeconds = 0.10,
     debounceSeconds = 0.35,
     capsLockEnabled = false,
-    rightShiftEnabled = true,
+    -- Toggle defaults to { "rightshift" } when not overridden in config.lua.
 }
