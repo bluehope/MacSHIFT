@@ -4,7 +4,7 @@
 
 MacSHIFT keeps macOS input sources aligned between two Macs in a shared session. It currently synchronizes Korean 2-set and ABC input sources without a network service, SSH, clipboard access, or text capture.
 
-[한국어 안내](#한국어) · [Website source](docs/)
+[Project website](https://bluehope.github.io/MacSHIFT/) · [한국어 안내](#한국어) · [Website source](docs/)
 
 > Status: Korean/English support is ready. Japanese and Chinese are documented as a future CJK extension, not as a current feature.
 
