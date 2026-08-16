@@ -14,7 +14,7 @@ MacSHIFT keeps macOS input sources aligned between two Macs in a shared session.
 
 #### Why is this needed?
 
-During a shared Mac session, each Mac keeps its input source and Korean composition state independently. Keystrokes are forwarded, but the Korean/English input state is not.
+Even when you connect to another Mac through [macOS Screen Sharing](https://support.apple.com/en-jo/guide/mac-help/mh14066/mac) or [Jump Desktop](https://jumpdesktop.com/), keystrokes are forwarded while each Mac keeps its input source and Korean composition state independently.
 
 #### What can go wrong?
 
@@ -32,7 +32,7 @@ MacSHIFT quickly aligns input states before typing, reducing separated Jamo and 
 
 #### 왜 필요한가요?
 
-원격 접속 중에도 두 Mac의 입력 소스와 한글 조합 상태는 각각 독립적으로 유지됩니다. 키 입력은 전달되지만, 한/영 상태 자체가 함께 전달되지는 않습니다.
+[macOS Screen Sharing](https://support.apple.com/en-jo/guide/mac-help/mh14066/mac)나 [Jump Desktop](https://jumpdesktop.com/)으로 다른 Mac에 원격 접속해도, 키 입력은 전달되지만 두 Mac의 입력 소스와 한글 조합 상태는 각각 독립적으로 유지됩니다.
 
 #### 어떤 문제가 생기나요?
 
