@@ -1,8 +1,8 @@
 # MacSHIFT
 
-**Mac IME synchronization for remote typing.**
+**Mac IME synchronization for shared sessions.**
 
-MacSHIFT keeps macOS input sources aligned between two Macs during a remote session. It currently synchronizes Korean 2-set and ABC input sources without a network service, SSH, clipboard access, or text capture.
+MacSHIFT keeps macOS input sources aligned between two Macs in a shared session. It currently synchronizes Korean 2-set and ABC input sources without a network service, SSH, clipboard access, or text capture.
 
 [한국어 안내](#한국어) · [Website source](docs/)
 
@@ -11,8 +11,8 @@ MacSHIFT keeps macOS input sources aligned between two Macs during a remote sess
 ## What it supports
 
 - Verified with Jump Desktop and macOS Screen Sharing.
-- `local`, `remote`, and `both` roles. The installer detects Jump Desktop Viewer and Connect when present.
-- `Ctrl+Option+H` for Korean (Hangul), `Ctrl+Option+L` for English (Latin), and Right Shift for a local-state toggle.
+- The installer’s setup labels are `local` for the Mac you connect from, `remote` for the other Mac, and `both` for a Mac used in either direction.
+- `Ctrl+Option+H` for Korean (Hangul), `Ctrl+Option+L` for English (Latin), and Right Shift to toggle from this Mac’s current input source.
 - Hammerspoon installation through Homebrew when available, plus a daily opt-out-able update check.
 
 ## Install
@@ -41,13 +41,13 @@ hs.reload()
 
 ## Use
 
-On a Mac installed as `local` or `both`:
+Run MacSHIFT on every Mac taking part in the session: the Mac you are using and the other Mac.
 
-- `Ctrl+Option+H` — set local and active remote session to Korean
-- `Ctrl+Option+L` — set local and active remote session to English
-- `Right Shift` — toggle Korean/English; when a supported remote desktop app is frontmost, synchronize it too
+- `Ctrl+Option+H` — set this Mac and the active Mac you connect to to Korean
+- `Ctrl+Option+L` — set this Mac and the active Mac you connect to to English
+- `Right Shift` — toggle Korean/English from this Mac's current input source; when a supported sharing app is frontmost, synchronize it too
 
-The remote Mac receives `F18` for Korean and `F19` for English. Install it with `--role remote` or `--role both`.
+The other Mac receives `F18` for Korean and `F19` for English. Use `--role remote` or `--role both` there.
 
 ```sh
 ./install.sh --role local
@@ -77,7 +77,7 @@ dofile("/path/to/MacSHIFT/scripts/show-input-sources.lua")
 ## Troubleshooting
 
 - **No shortcut response:** grant Accessibility permission, run `hs.reload()`, then check for a conflicting shortcut.
-- **Remote source does not change:** make the remote desktop app frontmost, verify `F18`/`F19` are forwarded, and install `remote` or `both` on the other Mac.
+- **Other Mac does not change:** make the sharing app frontmost, verify `F18`/`F19` are forwarded, and use `remote` or `both` on the other Mac.
 - **Update problem:** inspect `~/.local/state/macshift/update.log`; run `./install.sh --update` manually after fixing network access.
 
 ## Privacy and security

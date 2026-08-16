@@ -1,5 +1,5 @@
 return {
-    -- local: controller, remote: receiver, both: both roles on this Mac
+    -- CLI labels: local = this Mac connects; remote = the other Mac receives; both = either direction
     role = "local",
     abcSourceID = "com.apple.keylayout.ABC",
     koreanSourceID = "com.apple.inputmethod.Korean.2SetKorean",

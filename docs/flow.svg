@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 620" role="img" aria-labelledby="title desc">
   <title id="title">MacSHIFT input synchronization flow</title>
-  <desc id="desc">A user selects Korean or English. MacSHIFT changes the local input source and, when a remote desktop is active, sends F18 or F19 to the remote Mac, which applies the same source.</desc>
+  <desc id="desc">A user selects Korean or English. MacSHIFT changes this Mac's input source and, when a sharing app is active, sends F18 or F19 to the other Mac, which applies the same source.</desc>
   <defs>
     <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#16342b"/></marker>
     <style>
@@ -18,21 +18,21 @@
 
   <path d="M270 231 H347" class="line"/>
   <rect x="350" y="175" width="210" height="112" rx="16" class="box" fill="#ffda79"/>
-  <text x="455" y="214" text-anchor="middle" class="tag">LOCAL CONTROLLER</text>
+  <text x="455" y="214" text-anchor="middle" class="tag">THIS MAC</text>
   <text x="455" y="246" text-anchor="middle" class="label">Choose KO or EN</text>
-  <text x="455" y="270" text-anchor="middle" class="small">Apply local input source</text>
+  <text x="455" y="270" text-anchor="middle" class="small">Apply this Mac's input source</text>
 
   <path d="M560 231 H627" class="line"/>
   <path d="M665 168 L740 231 L665 294 L590 231 Z" class="box" fill="#ffffff"/>
-  <text x="665" y="210" text-anchor="middle" class="tag">REMOTE</text>
-  <text x="665" y="230" text-anchor="middle" class="tag">DESKTOP</text>
-  <text x="665" y="258" text-anchor="middle" class="label">Active?</text>
+  <text x="665" y="215" text-anchor="middle" class="tag">SHARING</text>
+  <text x="665" y="233" text-anchor="middle" class="tag">APP</text>
+  <text x="665" y="261" text-anchor="middle" class="label">Active?</text>
 
   <path d="M665 294 V405 H414" class="line"/>
   <text x="544" y="386" class="tag">NO</text>
   <rect x="150" y="405" width="265" height="112" rx="16" class="box" fill="#e8ece6"/>
-  <text x="282" y="448" text-anchor="middle" class="tag">LOCAL ONLY</text>
-  <text x="282" y="480" text-anchor="middle" class="label">Keep typing locally</text>
+  <text x="282" y="448" text-anchor="middle" class="tag">THIS MAC ONLY</text>
+  <text x="282" y="480" text-anchor="middle" class="label">Keep typing here</text>
 
   <path d="M740 231 H807" class="line"/>
   <text x="766" y="211" class="tag">YES</text>
@@ -43,11 +43,10 @@
 
   <path d="M970 231 H1027" class="line"/>
   <rect x="1030" y="175" width="120" height="112" rx="16" class="box" fill="#d7c7ff"/>
-  <text x="1090" y="214" text-anchor="middle" class="tag">REMOTE</text>
-  <text x="1090" y="238" text-anchor="middle" class="tag">RECEIVER</text>
-  <text x="1090" y="269" text-anchor="middle" class="small">Apply KO / EN</text>
+  <text x="1090" y="214" text-anchor="middle" class="tag">OTHER MAC</text>
+  <text x="1090" y="252" text-anchor="middle" class="small">Apply KO / EN</text>
 
-  <path d="M160 570 H250" class="line"/><text x="262" y="576" class="small">Local action</text>
+  <path d="M160 570 H250" class="line"/><text x="262" y="576" class="small">This Mac action</text>
   <rect x="430" y="554" width="20" height="20" rx="4" fill="#b8e1ff" stroke="#16342b" stroke-width="2"/><text x="462" y="570" class="small">Keyboard signal</text>
-  <rect x="690" y="554" width="20" height="20" rx="4" fill="#d7c7ff" stroke="#16342b" stroke-width="2"/><text x="722" y="570" class="small">Remote input source</text>
+  <rect x="690" y="554" width="20" height="20" rx="4" fill="#d7c7ff" stroke="#16342b" stroke-width="2"/><text x="722" y="570" class="small">Other Mac input source</text>
 </svg>
