@@ -22,7 +22,7 @@ When the two input states differ, Korean text may arrive as separated Jamo inste
 
 #### How does MacSHIFT help?
 
-MacSHIFT uses Hammerspoon to send the Korean or English state selected on this Mac to the other Mac as an explicit key signal. After connecting, pressing the configured toggle shortcut once—or using a Korean/English shortcut—aligns the other Mac with the same input state. It has been verified with Jump Desktop and macOS Screen Sharing.
+MacSHIFT uses [Hammerspoon](https://www.hammerspoon.org/) to send the Korean or English state selected on this Mac to the other Mac as an explicit key signal. After connecting, pressing the configured toggle shortcut once—or using a Korean/English shortcut—aligns the other Mac with the same input state. It has been verified with Jump Desktop and macOS Screen Sharing.
 
 #### What changes?
 
@@ -40,7 +40,7 @@ MacSHIFT quickly aligns input states before typing, reducing separated Jamo and 
 
 #### MacSHIFT는 어떻게 해결하나요?
 
-MacSHIFT는 Hammerspoon을 이용해 이 Mac에서 선택한 한글 또는 영어 상태를 명시적 키 신호로 다른 Mac에 전달합니다. 연결 후 설정한 토글 키를 한 번 누르거나 한/영 단축키를 사용하면, 다른 Mac도 같은 입력 상태로 맞춥니다. Jump Desktop과 macOS Screen Sharing에서 동작을 확인했습니다.
+MacSHIFT는 [Hammerspoon](https://www.hammerspoon.org/)을 이용해 이 Mac에서 선택한 한글 또는 영어 상태를 명시적 키 신호로 다른 Mac에 전달합니다. 연결 후 설정한 토글 키를 한 번 누르거나 한/영 단축키를 사용하면, 다른 Mac도 같은 입력 상태로 맞춥니다. Jump Desktop과 macOS Screen Sharing에서 동작을 확인했습니다.
 
 #### 무엇이 달라지나요?
 
