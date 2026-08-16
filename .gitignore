@@ -1,0 +1,6 @@
+.DS_Store
+*.ime-sync-tmp
+JumpDesktop_Mac_IME_Sync_Spec.md
+config.lua
+.env
+dist/
