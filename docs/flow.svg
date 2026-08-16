@@ -18,9 +18,9 @@
 
   <path d="M270 231 H347" class="line"/>
   <rect x="350" y="175" width="210" height="112" rx="16" class="box" fill="#ffda79"/>
-  <text x="455" y="214" text-anchor="middle" class="tag">THIS MAC</text>
-  <text x="455" y="246" text-anchor="middle" class="label">Choose KO or EN</text>
-  <text x="455" y="270" text-anchor="middle" class="small">Apply this Mac's input source</text>
+  <image href="assets/flaticon-macbook-pro-482472.png" x="433" y="182" width="44" height="44" preserveAspectRatio="xMidYMid meet"/>
+  <text x="455" y="250" text-anchor="middle" class="tag">THIS MAC</text>
+  <text x="455" y="274" text-anchor="middle" class="small">Set KO / EN</text>
 
   <path d="M560 231 H627" class="line"/>
   <path d="M665 168 L740 231 L665 294 L590 231 Z" class="box" fill="#ffffff"/>
@@ -43,8 +43,9 @@
 
   <path d="M970 231 H1027" class="line"/>
   <rect x="1030" y="175" width="120" height="112" rx="16" class="box" fill="#d7c7ff"/>
-  <text x="1090" y="214" text-anchor="middle" class="tag">OTHER MAC</text>
-  <text x="1090" y="252" text-anchor="middle" class="small">Apply KO / EN</text>
+  <image href="assets/flaticon-mac-mini-482470.png" x="1067" y="182" width="46" height="46" preserveAspectRatio="xMidYMid meet"/>
+  <text x="1090" y="250" text-anchor="middle" class="tag">OTHER MAC</text>
+  <text x="1090" y="274" text-anchor="middle" class="small">Apply KO / EN</text>
 
   <path d="M160 570 H250" class="line"/><text x="262" y="576" class="small">This Mac action</text>
   <rect x="430" y="554" width="20" height="20" rx="4" fill="#b8e1ff" stroke="#16342b" stroke-width="2"/><text x="462" y="570" class="small">Keyboard signal</text>
