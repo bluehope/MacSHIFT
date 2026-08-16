@@ -85,7 +85,7 @@ F20 이상이 Jump Desktop에서 전달되는지는 실제 Viewer/Connect 조합
 
 ## 권장 구현 순서
 
-1. `sources` 맵과 `cycle`을 추가하되 legacy `abcSourceID/koreanSourceID`도 잠시 지원
+1. 현재 KO/EN 설정을 `sources` 맵과 `cycle` 구조로 일반화
 2. 언어별 Source ID 검증 함수 작성
 3. `setTarget(languageCode)`와 `receive(languageCode)`로 내부 API 일반화
 4. Right Shift 순환 동작 일반화

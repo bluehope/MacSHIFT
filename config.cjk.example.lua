@@ -1,5 +1,5 @@
 -- 예시 전용 설정입니다.
--- 현재 hammerspoon/ime_sync.lua는 legacy abcSourceID/koreanSourceID
+-- 현재 hammerspoon/ime_sync.lua는 KO/EN 전용 englishSourceIDs/koreanSourceID
 -- 형식을 사용하므로, 이 파일을 config.lua로 바로 복사하지 마십시오.
 -- CJK 일반화 구현 후 사용할 목표 설정 예시입니다.
 

@@ -79,22 +79,10 @@ local function sourceExists(sourceID)
 end
 
 local function englishSourceID()
-    -- englishSourceIDs is the current setting. abcSourceID remains a supported
-    -- legacy override, but falls back to the current candidates when unavailable.
-    local candidates = {}
-    if type(config.abcSourceID) == "string" and config.abcSourceID ~= "" then
-        table.insert(candidates, config.abcSourceID)
-    end
-    if type(config.englishSourceID) == "string" and config.englishSourceID ~= "" then
-        table.insert(candidates, config.englishSourceID)
-    end
     for _, sourceID in ipairs(config.englishSourceIDs or {}) do
-        table.insert(candidates, sourceID)
-    end
-    for _, sourceID in ipairs(candidates) do
         if sourceExists(sourceID) then return sourceID end
     end
-    return candidates[1]
+    return (config.englishSourceIDs or {})[1]
 end
 
 local function validateSources()
