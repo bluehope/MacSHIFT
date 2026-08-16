@@ -47,6 +47,8 @@ Run MacSHIFT on every Mac taking part in the session: the Mac you are using and 
 - `Ctrl+Option+L` — set this Mac and the active Mac you connect to to English
 - `Right Shift` — toggle Korean/English from this Mac's current input source; when a supported sharing app is frontmost, synchronize it too
 
+After connecting, press the configured toggle shortcut once (`Right Shift` by default). MacSHIFT reads this Mac’s current Korean or English state and applies the same state to the other Mac, regardless of how either Mac started.
+
 The other Mac receives `F18` for Korean and `F19` for English. Use `--role remote` or `--role both` there.
 
 ```sh
@@ -146,6 +148,8 @@ curl -fsSL https://raw.githubusercontent.com/bluehope/MacSHIFT/main/bootstrap.sh
 - `Ctrl+Option+H`: 한글(Hangul)로 지정
 - `Ctrl+Option+L`: 영어(Latin)로 지정
 - `Right Shift`: 로컬 한/영 토글. 원격 앱이 앞에 있으면 원격에도 동기화
+
+접속한 뒤 설정한 토글 키(기본값 `Right Shift`)를 한 번 누르면, 이 Mac의 현재 한/영 상태를 기준으로 다른 Mac도 같은 상태로 맞춥니다. 두 Mac이 어떤 상태에서 시작했는지와 관계없이 동기화됩니다.
 
 원격 Mac은 `F18`(한글), `F19`(영어) 신호를 받습니다. 접속하는 Mac은 `--role local`, 접속받는 Mac은 `--role remote`, 양쪽 역할을 모두 쓸 Mac은 `--role both`로 설치할 수 있습니다.
 
