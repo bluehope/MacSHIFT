@@ -1,7 +1,12 @@
 return {
     -- local: 접속하는 쪽, remote: 접속받는 쪽, both: 양쪽 역할 모두
     role = "local",
-    abcSourceID = "com.apple.keylayout.ABC",
+    -- ABC is preferred when both ABC and U.S. are enabled; otherwise U.S. is used.
+    -- Change the order to prefer U.S., or add another enabled English layout.
+    englishSourceIDs = {
+        "com.apple.keylayout.ABC",
+        "com.apple.keylayout.US",
+    },
     -- 이 컴퓨터의 HIToolbox 설정에서 확인한 두벌식 Source ID입니다.
     -- 다른 Mac에서 다르면 설치 시 --korean-source-id로 덮어쓸 수 있습니다.
     koreanSourceID = "com.apple.inputmethod.Korean.2SetKorean",

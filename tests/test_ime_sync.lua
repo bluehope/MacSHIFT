@@ -58,11 +58,11 @@ hs = {
     },
 }
 
-local function load(role, toggleBinding)
+local function load(role, toggleBinding, englishSourceIDs)
     if toggleBinding == nil then toggleBinding = false end
     IME_SYNC_CONFIG = {
         role = role,
-        abcSourceID = "com.apple.keylayout.ABC",
+        englishSourceIDs = englishSourceIDs or { "com.apple.keylayout.ABC", "com.apple.keylayout.US" },
         koreanSourceID = "com.apple.inputmethod.Korean.2SetKorean",
         remoteDesktopBundleIDs = { "com.p5sys.jump.mac.viewer", "com.apple.ScreenSharing" },
         imeShortcuts = {
@@ -130,6 +130,13 @@ local consumed = eventTapCallback({
 check(consumed == true, "both role consumes incoming F19 outside Viewer")
 check(currentSource == "com.apple.keylayout.ABC", "both role applies incoming EN locally")
 check(#sentKeys == 1, "both role receiver does not echo incoming signal")
+
+hs.keycodes.layouts = function() return { "com.apple.keylayout.US" } end
+frontmostBundle = "com.apple.TextEdit"
+local usAPI = load("local", false)
+check(usAPI._englishSourceID() == "com.apple.keylayout.US", "U.S. is selected when ABC is unavailable")
+check(usAPI.setLocal("EN") == true, "U.S. English source is accepted")
+check(currentSource == "com.apple.keylayout.US", "local EN selects U.S. source")
 
 if failures > 0 then
     io.stderr:write(string.format("%d test(s) failed\n", failures))

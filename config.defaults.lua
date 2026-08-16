@@ -1,7 +1,12 @@
 return {
     -- CLI labels: local = this Mac connects; remote = the other Mac receives; both = either direction
     role = "local",
-    abcSourceID = "com.apple.keylayout.ABC",
+    -- Prefer ABC when both common English layouts are enabled; use U.S. otherwise.
+    -- Put a different enabled layout first to override this preference.
+    englishSourceIDs = {
+        "com.apple.keylayout.ABC",
+        "com.apple.keylayout.US",
+    },
     koreanSourceID = "com.apple.inputmethod.Korean.2SetKorean",
     remoteDesktopBundleIDs = {
         "com.p5sys.jump.mac.viewer", -- Jump Desktop Viewer

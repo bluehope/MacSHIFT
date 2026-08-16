@@ -2,7 +2,7 @@
 
 **Mac IME synchronization for shared sessions.**
 
-MacSHIFT keeps macOS input sources aligned between two Macs in a shared session. It currently synchronizes Korean 2-set and ABC input sources without a network service, SSH, clipboard access, or text capture.
+MacSHIFT keeps macOS input sources aligned between two Macs in a shared session. It currently synchronizes Korean 2-set and the macOS ABC or U.S. English input source without a network service, SSH, clipboard access, or text capture.
 
 [Project website](https://bluehope.github.io/MacSHIFT/) · [한국어 안내](#한국어) · [Website source](docs/)
 
@@ -113,7 +113,7 @@ MacSHIFT installs a daily LaunchAgent update check by default. It downloads only
 ./install.sh --update
 ```
 
-Your settings live at `~/.config/macshift/config.lua`; installed defaults live beside it in `config.defaults.lua`. Defaults are merged with your settings, so new options can be added without overwriting your role, Source IDs, or shortcuts.
+Your settings live at `~/.config/macshift/config.lua`; installed defaults live beside it in `config.defaults.lua`. Defaults are merged with your settings, so new options can be added without overwriting your role, Source IDs, or shortcuts. MacSHIFT supports both `ABC` and `U.S.` English layouts. When both are enabled, it selects `ABC` by default; reverse `englishSourceIDs` to prefer `U.S.`.
 
 ### Customize shortcuts
 
@@ -170,7 +170,7 @@ sh tests/test_release_tools.sh
 
 ## 한국어
 
-MacSHIFT는 원격으로 접속한 두 Mac의 macOS 입력 소스를 맞춰 주는 도구입니다. 현재는 두벌식 한국어와 ABC 영어를 지원합니다. Jump Desktop 및 macOS Screen Sharing에서 작동을 확인했습니다.
+MacSHIFT는 원격으로 접속한 두 Mac의 macOS 입력 소스를 맞춰 주는 도구입니다. 현재는 두벌식 한국어와 영어 `ABC`·`U.S.` 입력 소스를 지원합니다. 둘 다 활성화되어 있으면 기본으로 `ABC`를 선택하며, 설정의 `englishSourceIDs` 순서를 바꾸면 `U.S.`를 우선할 수 있습니다. Jump Desktop 및 macOS Screen Sharing에서 작동을 확인했습니다.
 
 ### 설치
 

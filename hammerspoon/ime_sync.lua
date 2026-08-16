@@ -78,10 +78,30 @@ local function sourceExists(sourceID)
     return false
 end
 
+local function englishSourceID()
+    -- englishSourceIDs is the current setting. abcSourceID remains a supported
+    -- legacy override, but falls back to the current candidates when unavailable.
+    local candidates = {}
+    if type(config.abcSourceID) == "string" and config.abcSourceID ~= "" then
+        table.insert(candidates, config.abcSourceID)
+    end
+    if type(config.englishSourceID) == "string" and config.englishSourceID ~= "" then
+        table.insert(candidates, config.englishSourceID)
+    end
+    for _, sourceID in ipairs(config.englishSourceIDs or {}) do
+        table.insert(candidates, sourceID)
+    end
+    for _, sourceID in ipairs(candidates) do
+        if sourceExists(sourceID) then return sourceID end
+    end
+    return candidates[1]
+end
+
 local function validateSources()
     local missing = {}
-    if not sourceExists(config.abcSourceID) then
-        table.insert(missing, "ABC: " .. tostring(config.abcSourceID))
+    local englishID = englishSourceID()
+    if not sourceExists(englishID) then
+        table.insert(missing, "English: " .. tostring(englishID))
     end
     if not sourceExists(config.koreanSourceID) then
         table.insert(missing, "Korean: " .. tostring(config.koreanSourceID))
@@ -129,7 +149,7 @@ local function targetDetails(target)
     if target == "KO" then
         return config.koreanSourceID, "KO", config.signalModifiers or {}, (config.signalKeys or {}).ko
     end
-    return config.abcSourceID, "EN", config.signalModifiers or {}, (config.signalKeys or {}).en
+    return englishSourceID(), "EN", config.signalModifiers or {}, (config.signalKeys or {}).en
 end
 
 local function sendRemoteSignal(target)
@@ -327,6 +347,7 @@ end
 
 api.config = config
 api._sourceExists = sourceExists
+api._englishSourceID = englishSourceID
 api._isRemoteDesktopFrontmost = isRemoteDesktopFrontmost
 api._mergeTables = mergeTables
 
