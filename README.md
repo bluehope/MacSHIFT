@@ -10,15 +10,37 @@ MacSHIFT keeps macOS input sources aligned between two Macs in a shared session.
 
 ## Why MacSHIFT?
 
-When working through a remote Mac session, the two Macs keep their input-source state independently. You may be in Korean on the Mac at your keyboard while the other Mac is still in English, or the reverse. The next keystroke then lands in the wrong language, interrupting typing and requiring a manual correction on the other side.
+### Cause
 
-MacSHIFT makes that handoff explicit: after connecting, it applies the Korean or English state you choose on this Mac to the other Mac as well.
+During a shared Mac session, each Mac keeps its input source and Korean composition state independently. Keystrokes are forwarded, but the Korean/English input state is not.
 
-### 왜 MacSHIFT가 필요한가요?
+### Problem
 
-원격 Mac에 접속해도 두 Mac의 입력 소스 상태는 각각 따로 유지됩니다. 내 키보드가 연결된 Mac은 한글인데 다른 Mac은 영어인 상태, 또는 그 반대 상태가 생길 수 있습니다. 다음 입력이 엉뚱한 언어로 들어가고, 다른 쪽에서 다시 수동으로 고쳐야 합니다.
+When the two input states differ, Korean text may arrive as separated Jamo instead of composed Hangul characters. An unexpected Korean or English state also interrupts typing and requires manual correction on the other Mac.
 
-MacSHIFT는 이 전환을 명시적으로 맞춥니다. 접속 후 이 Mac에서 선택한 한글 또는 영어 상태를 다른 Mac에도 같은 상태로 적용합니다.
+### Project Summary
+
+MacSHIFT uses Hammerspoon to send the Korean or English state selected on this Mac to the other Mac as an explicit key signal. After connecting, pressing the configured toggle shortcut once—or using a Korean/English shortcut—aligns the other Mac with the same input state. It has been verified with Jump Desktop and macOS Screen Sharing.
+
+### Results and Expected Impact
+
+MacSHIFT quickly aligns input states before typing, reducing separated Jamo and wrong-language input. It uses only keyboard events already carried by the remote session—no separate server, network listener, or clipboard sharing.
+
+### 문제 원인
+
+원격 접속 중에도 두 Mac의 입력 소스와 한글 조합 상태는 각각 독립적으로 유지됩니다. 키 입력은 전달되지만, 한/영 상태 자체가 함께 전달되지는 않습니다.
+
+### 문제 제시
+
+두 Mac의 입력 상태가 다를 때, 한글 입력이 완성된 글자가 아니라 자소 단위로 분리되어 들어갈 수 있습니다. 영어·한글 상태가 예상과 다르면 입력을 멈추고 다른 Mac에서 다시 고쳐야 합니다.
+
+### 연구 요약
+
+MacSHIFT는 Hammerspoon을 이용해 이 Mac에서 선택한 한글 또는 영어 상태를 명시적 키 신호로 다른 Mac에 전달합니다. 연결 후 설정한 토글 키를 한 번 누르거나 한/영 단축키를 사용하면, 다른 Mac도 같은 입력 상태로 맞춥니다. Jump Desktop과 macOS Screen Sharing에서 동작을 확인했습니다.
+
+### 결과 및 예상 효과
+
+입력 시작 전 두 Mac의 한/영 상태를 빠르게 맞춰 자소 분리와 잘못된 언어 입력을 줄입니다. 별도 서버·네트워크 연결·클립보드 공유 없이, 기존 원격 세션의 키 전달만 사용합니다.
 
 ## See it in action
 
