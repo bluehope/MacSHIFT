@@ -8,6 +8,13 @@ MacSHIFT keeps macOS input sources aligned between two Macs in a shared session.
 
 > Status: Korean/English support is ready. Japanese and Chinese are documented as a future CJK extension, not as a current feature.
 
+## See it in action
+
+<picture>
+  <source media="(min-width: 768px)" srcset="docs/assets/sample-hq.gif">
+  <img src="docs/assets/sample.gif" alt="MacSHIFT project website shown in Safari" width="960">
+</picture>
+
 ## What it supports
 
 - Verified with Jump Desktop and macOS Screen Sharing.
